@@ -14,7 +14,7 @@ public class mainTest {
 //		producer.start();
 //		consumer.start();
 		
-		System.out.println("消息_队列是个什么东西");
+		System.out.println("消息队列是个什么东西");
 		
 		/*次数与胜场的比例为2:35*/
 		int win1 = 15;
