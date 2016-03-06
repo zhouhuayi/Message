@@ -14,7 +14,7 @@ public class mainTest {
 //		producer.start();
 //		consumer.start();
 		
-		System.out.println("消息队列");
+		System.out.println("分支最后一次提交");
 		
 		/*次数与胜场的比例为2:35*/
 		int win1 = 15;
