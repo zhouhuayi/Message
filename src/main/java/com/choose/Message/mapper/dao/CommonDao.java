@@ -689,7 +689,7 @@ public class CommonDao<T> {
 	}
 	
 	/**
-	* 防止sql注入
+	* 正则防止sql注入
 	* 
 	* @author 周化益
 	* @param sql
@@ -754,6 +754,7 @@ public class CommonDao<T> {
 		return commonMapper.getCount1(params);
 	}
 	
+	/**获取单个值得列表*/
 	public List<Long> getListObject1(Params params){
 		if(params.getWhereSql() == null || params.getWhereSql().equals("")) {
 			params.setWhereSql("1=1"); 
@@ -761,6 +762,7 @@ public class CommonDao<T> {
 		return commonMapper.getListObject1(params);
 	}
 	
+	/**获取map集合数据*/
 	public List<Map<String,Object>> getListMap1(Params params){
 		if(params.getWhereSql() == null || params.getWhereSql().equals("")) {
 			params.setWhereSql("1=1"); 
