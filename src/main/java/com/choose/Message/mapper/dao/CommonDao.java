@@ -683,27 +683,24 @@ public class CommonDao<T> {
 		while(it.hasNext()) {
 			String key = it.next();
 			StringBuffer value = new StringBuffer(param.get(key).toString().trim());
-			int index = value.indexOf("'");
-			int last = value.lastIndexOf("'");
-			int valueLength = value.length();
-
-			while(index == 0) {
-				value = value.deleteCharAt(index);
-				index = value.indexOf("'");
-				last --;
-				valueLength --;
-			}
-			
-			while(last == valueLength-1) {
-				value = value.deleteCharAt(last);
-				last = value.indexOf("'");
-				valueLength --;
-			}
-			
-			sql = sql.replaceAll('#' + key, '\'' + value.toString() + '\'');
+			sql = sql.replaceAll('#' + key, '\'' + TransactSQLInjection(value.toString()) + '\'');
 		}
 		return sql;
 	}
+	
+	/**
+	* 正则防止sql注入
+	* 
+	* @author 周化益
+	* @param sql
+	* @return
+	*/
+	public static String TransactSQLInjection(String sql) {
+		String reg = "(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|"
+				+ "(\\b(select|update|and|or|delete|insert|trancate|char|into|substr|ascii|declare|exec|count|master|into|drop|execute)\\b)";  
+		return sql.replaceAll(reg, " ");
+	}
+	
 	
 	/**
 	 * 添加方法
@@ -757,6 +754,7 @@ public class CommonDao<T> {
 		return commonMapper.getCount1(params);
 	}
 	
+	/**获取单个值得列表*/
 	public List<Long> getListObject1(Params params){
 		if(params.getWhereSql() == null || params.getWhereSql().equals("")) {
 			params.setWhereSql("1=1"); 
@@ -764,6 +762,7 @@ public class CommonDao<T> {
 		return commonMapper.getListObject1(params);
 	}
 	
+	/**获取map集合数据*/
 	public List<Map<String,Object>> getListMap1(Params params){
 		if(params.getWhereSql() == null || params.getWhereSql().equals("")) {
 			params.setWhereSql("1=1"); 
