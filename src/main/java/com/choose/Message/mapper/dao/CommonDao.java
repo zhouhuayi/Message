@@ -696,7 +696,7 @@ public class CommonDao<T> {
 	* @return
 	*/
 	public static String TransactSQLInjection(String sql) {
-		String reg = "(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|"  
+		String reg = "(?:')|(?:--)|(/\\*(?:.|[\\n\\r])*?\\*/)|"
 				+ "(\\b(select|update|and|or|delete|insert|trancate|char|into|substr|ascii|declare|exec|count|master|into|drop|execute)\\b)";  
 		return sql.replaceAll(reg, " ");
 	}
